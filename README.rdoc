@@ -1,5 +1,83 @@
-= Redmine
+= Howto and prepared source to deploy Redmine on Heroku.
+This is a Redmine (v 3.3) project source with some few changes needed to deploy on heroku.com
 
+== Redmine
 Redmine is a flexible project management web application written using Ruby on Rails framework.
-
 More details can be found in the doc directory or on the official website http://www.redmine.org
+
+== {Heroku.com}[http://heroku.com]
+Heroku is a cloud platform that lets companies build, deliver, monitor and scale apps — we're the fastest way to go from idea to URL, bypassing all those infrastructure headaches.
+
+= FAST deploy
+
+You can use this repository to deploy it on heroku.com. 
+Attention, this source use <em>thin</em> gem web service instead default Webrick.
+Comment it in Gemfile to use Webrick.
+
+=== Steps:
+
+1. Install heroku Toolbelt (unix version here):
+    wget -O- https://toolbelt.heroku.com/install-ubuntu.sh | sh
+
+2. Clone this repository (or see {How to prepare Rails source}[rdoc-label:README.rdoc#how-to-prepare-rails-source]):
+    git clone https://github.com/GremL1N/redmine-to-heroku.git your_path
+   and <tt>cd to your_path</tt>
+
+3. Create Heroku APP using web interface or command:  
+    heroku login
+    heroku apps:create HEROKU_APP_NAME
+
+4. Add Heroku Postgres addon to your app. Use resources tab(on heroku.com) or command:
+    heroku addons:create heroku-postgresql --app HEROKU_APP_NAME --name main-db --as DATABASE
+
+5. rake secret and create environment variable SECRET_KEY_BASE on heroku app. Use setting tab or command: 
+    heroku config:add --app HEROKU_APP_NAME SECRET_KEY_BASE=hash-from-rake-command
+
+6. Deploy:
+    heroku git:remote -a HEROKU_APP_NAME
+    git push heroku master
+    heroku run --app HEROKU_APP_NAME rake db:migrate
+
+= How to prepare Rails source
+
+Tested for Rails 4.2.6
+
+1. Copy Redmine official source svn or unofficial from github and bitbucket.
+    svn co https://svn.redmine.org/redmine/branches/3.3-stable redmine-3.3_to_heroku
+    cd redmine-3.3_to_heroku
+
+2. Unlikely you use svn :) 
+    rm -rf .svn
+
+3. Create git repositoy (or mercurial): 
+    git init
+
+4. In ignore files (.gitignore and .hgignore) remove lines:
+   - config/database.yml
+   - config/secrets.yml
+   - Gemfile
+   - Gemfile.lock
+5. Create config/database.yml:  
+    production:
+      adapter: postgresql
+      url: <%= ENV["DATABASE_URL"] %>	
+
+6. Create config/secrets.yml
+    production:
+      secret_key_base: <%= ENV["SECRET_KEY_BASE"] %>
+
+7. Add to Gemfile
+    group :production do
+      gem thin
+    end
+
+8. <tt>bundle install </tt>
+
+9. Commit changes 
+    git add .  
+    git commit -m "init"  
+    git remote add origin https://github.com/GremL1N/redmine-to-heroku.git  
+    git push -u origin master </tt>
+
+Now you can create repo on github (w/o any files and descriptions) and deploy on heroku via github or depoly directly (like in Fast method 6) or maybe you like dropbox.
+Don't forget check environment variables of Heroku app on settings tab.
