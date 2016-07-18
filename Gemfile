@@ -59,6 +59,11 @@ end
 # configuration file
 require 'erb'
 require 'yaml'
+
+group :production do
+  gem "thin"
+end
+
 database_file = File.join(File.dirname(__FILE__), "config/database.yml")
 if File.exist?(database_file)
   database_config = YAML::load(ERB.new(IO.read(database_file)).result)
