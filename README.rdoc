@@ -19,7 +19,7 @@ Comment it in Gemfile to use Webrick.
 1. Install heroku Toolbelt (unix version here):
     wget -O- https://toolbelt.heroku.com/install-ubuntu.sh | sh
 
-2. Clone this repository (or see {How to prepare Rails source}[link:redmine-to-heroku#how-to-prepare-rails-app-source]):
+2. Clone this repository (or see {How to prepare Rails source}[link:#how-to-prepare-rails-app-source]):
     git clone https://github.com/GremL1N/redmine-to-heroku.git your_path
    and <tt>cd to your_path</tt>
 
