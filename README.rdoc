@@ -58,6 +58,8 @@ Redmine example.
    - config/secrets.yml
    - Gemfile
    - Gemfile.lock
+   - /plugins
+   - /public/plugins_assets
 5. Create config/database.yml:  
     production:
       adapter: postgresql
