@@ -1,4 +1,4 @@
-= Howto and prepared source to deploy Redmine on Heroku.
+= How to deploy Redmine on Heroku.
 This is a Redmine (v 3.3) project source with some few changes needed to deploy on heroku.com
 
 == Redmine
@@ -38,9 +38,10 @@ Comment it in Gemfile to use Webrick.
     git push heroku master
     heroku run --app HEROKU_APP_NAME rake db:migrate
 
-= How to prepare Rails source
+= How to prepare Rails app source
 
 Tested for Rails 4.2.6
+Redmine example.
 
 1. Copy Redmine official source svn or unofficial from github and bitbucket.
     svn co https://svn.redmine.org/redmine/branches/3.3-stable redmine-3.3_to_heroku
