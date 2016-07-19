@@ -84,11 +84,11 @@ Redmine example.
 Now you can create repo on github (w/o any files and descriptions) and deploy on heroku via github or depoly directly (like in Fast method 6) or maybe you like dropbox.
 Don't forget check environment variables of Heroku app on settings tab.
 
-= How to add Redmine plugin
+= How to deploy Redmine plugin to Heroku
 
-All you need add plugin repository as git submodule.
+All you need is to add plugin repository as git submodule.
 For example to add redmine_ckeditor:
-1. cd to root of you redmine
+1. cd to root of your redmine
 2. remove '/public/plugin_assets'
 3. git git submodule add https://github.com/a-ono/redmine_ckeditor.git plugins/redmine_ckeditor
 4. bundle bundle install --without development test
