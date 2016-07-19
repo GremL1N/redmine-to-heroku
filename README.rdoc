@@ -58,7 +58,6 @@ Redmine example.
    - config/secrets.yml
    - Gemfile
    - Gemfile.lock
-   - /plugins
    - /public/plugins_assets
 5. Create config/database.yml:  
     production:
@@ -77,10 +76,21 @@ Redmine example.
 8. <tt>bundle install </tt>
 
 9. Commit changes 
-    git add .  
+    git add -A  
     git commit -m "init"  
     git remote add origin https://github.com/GremL1N/redmine-to-heroku.git  
     git push -u origin master </tt>
 
 Now you can create repo on github (w/o any files and descriptions) and deploy on heroku via github or depoly directly (like in Fast method 6) or maybe you like dropbox.
 Don't forget check environment variables of Heroku app on settings tab.
+
+= How to add Redmine plugin
+
+All you need add plugin repository as git submodule.
+For example to add redmine_ckeditor:
+1. cd to root of you redmine
+2. remove '/public/plugin_assets'
+3. git git submodule add https://github.com/a-ono/redmine_ckeditor.git plugins/redmine_ckeditor
+4. bundle bundle install --without development test
+5. git add -A
+6. git push heroku master
