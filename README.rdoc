@@ -89,7 +89,7 @@ Don't forget check environment variables of Heroku app on settings tab.
 All you need is to add plugin repository as git submodule.
 For example to add redmine_ckeditor:
 1. cd to root of your redmine
-2. remove '/public/plugin_assets'
+2. remove '/public/plugin_assets' from .gitignore
 3. git git submodule add https://github.com/a-ono/redmine_ckeditor.git plugins/redmine_ckeditor
 4. bundle bundle install --without development test
 5. git add -A
